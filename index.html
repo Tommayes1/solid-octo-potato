@@ -111,15 +111,33 @@
     }
 
     function filterMoves() {
-        const equipmentSelect = document.getElementById('equipment-select');
-        const levelSelect = document.getElementById('level-select');
-        const categorySelect = document.getElementById('category-select');
-        const moves = document.querySelectorAll('li');
-        const subheadings = document.querySelectorAll('.subheading');
+    const equipmentSelect = document.getElementById('equipment-select');
+    const levelSelect = document.getElementById('level-select');
+    const categorySelect = document.getElementById('category-select');
+    const moves = document.querySelectorAll('li');
+    const subheadings = document.querySelectorAll('.subheading');
 
-        subheadings.forEach(subheading => {
-            subheading.style.display = 'none';
-        });
+    subheadings.forEach(subheading => {
+        subheading.style.display = 'none';
+    });
+
+    moves.forEach(move => {
+        if (move.getAttribute('data-equipment') === equipmentSelect.value
+            && move.getAttribute('data-level') === levelSelect.value
+            && (move.getAttribute('data-category') === categorySelect.value || categorySelect.value === 'all')) {
+            move.style.display = 'block';
+
+            // Show subheadings when the "Show All" option is selected
+            if (categorySelect.value === 'all') {
+                const subheadingId = 'subheading-' + move.getAttribute('data-category');
+                const subheading = document.getElementById(subheadingId);
+                subheading.style.display = 'block';
+            }
+        } else {
+            move.style.display = 'none';
+        }
+    });
+}
 
         moves.forEach(move => {
             if (move.getAttribute('data-equipment') === equipmentSelect.value
