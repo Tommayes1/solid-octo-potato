@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Filter Moves</title>
     <style>
- body {
+        body {
             font-family: Arial, sans-serif;
             display: flex;
             flex-direction: column;
@@ -14,14 +14,12 @@
             height: 100vh;
             margin: 0;
         }
-
         select {
             width: 200px;
             height: 40px;
             margin-bottom: 20px;
             font-size: 16px;
         }
-
         ul {
             list-style-type: none;
             padding: 0;
@@ -31,10 +29,7 @@
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             padding: 20px;
-            overflow-y: auto;
-            max-height: 500px;
         }
-
         li {
             display: none;
             margin-bottom: 10px;
@@ -44,33 +39,10 @@
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
-
-        .move-list {
-            display: flex;
-            flex-direction: column;
-        }
-
         .subheading {
             font-weight: bold;
             margin-top: 15px;
             display: none;
-            width: 100%;
-        }
-
-        #move-list-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 20px;
-            max-width: 80%;
-        }
-
-        @media (max-width: 600px) {
-            ul {
-                max-width: 100%;
-                border-radius: 0;
-                box-shadow: none;
-            }
         }
     </style>
     <script>
@@ -180,33 +152,17 @@
     </select>
     <ul>
         <!-- Add your move list items here -->
-        
-        
-
 <li class="subheading" id="subheading-conditioning">Conditioning</li>
-
         <li data-equipment="hoop" data-level="1" data-category="conditioning">Wide overhand/underhand grip hang bent legs</li>
         <li data-equipment="hoop" data-level="1" data-category="conditioning">Elbow hangs</li>
-           
-
         <li class="subheading" id="subheading-under bar">Under bar</li>
-     
 <li data-equipment="hoop" data-level="1" data-category="under bar">Straddle mount and dismount</li>
 <li data-equipment="hoop" data-level="1" data-category="under bar">Side straddle mount and dismount</li>
-   
-
-
-
 <li class="subheading" id="subheading-in the hoop">In the Hoop</li>
-
 <li data-equipment="hoop" data-level="1" data-category="in the hoop">Double and single hocks climb into hoop</li>
 <li data-equipment="hoop" data-level="1" data-category="in the hoop">Layback sit</li>
-  
-
 <!-- Add more move list items with subheadings as needed -->
-
 <li class="subheading" id="subheading-spins">Spins</li>
-
 <li data-equipment="pole" data-level="1" data-category="spins">Show girl</li>
 <li data-equipment="pole" data-level="1" data-category="spins">Reverse step around</li>
 <li data-equipment="pole" data-level="1" data-category="spins">Forward Knee hook (and variations)</li>
@@ -221,11 +177,7 @@
 <li data-equipment="pole" data-level="1" data-category="spins">Horizontal knee hook</li>
 <li data-equipment="pole" data-level="1" data-category="spins">Body Wrap</li>
 <li data-equipment="pole" data-level="1" data-category="spins">Single straddle (Open boomerang)</li>
-  
-
-
 <li class="subheading" id="subheading-tricks">Tricks</li>
-<ul class="move-list">
 <li data-equipment="pole" data-level="1" data-category="tricks">Fireman and pin-up/swan/jazz dismount</li>
 <li data-equipment="pole" data-level="1" data-category="tricks">Cartwheel kick</li>
 <li data-equipment="pole" data-level="1" data-category="tricks">Under-arm turn and ‘Jack’</li>
@@ -238,8 +190,6 @@
 <li data-equipment="pole" data-level="1" data-category="tricks">Layout- hands on</li>
 <li data-equipment="pole" data-level="1" data-category="tricks">Basic inversion preparation</li>
 <li data-equipment="pole" data-level="1" data-category="tricks">Forearmstands with leg variations</li>
-  
-
 <li class="subheading" id="subheading-transitions">Transistions</li>
 <li data-equipment="pole" data-level="1" data-category="transitions">Cross walks</li>
 <li data-equipment="pole" data-level="1" data-category="transitions">2 step walks</li>
@@ -257,7 +207,6 @@
 <li data-equipment="pole" data-level="1" data-category="transitions">Forward floor roll</li>
 <li data-equipment="pole" data-level="1" data-category="transitions">Shoulder swivel</li>
 <li data-equipment="pole" data-level="1" data-category="transitions">Faint</li>
-
 </ul>
 
 </body>
