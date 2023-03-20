@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filter Moves</title>
+    <style>
+   body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+select {
+    width: 200px;
+    height: 40px;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+    max-width: 400px;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+li {
+    display: none;
+    margin-bottom: 10px;
+    font-size: 16px;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.move-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.subheading {
+    font-weight: bold;
+    margin-top: 15px;
+    display: none;
+    width: 100%;
+}
+
+#move-list-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    max-width: 80%;
+}
+    </style>
+    <script>
+        const categories = {
+            "hoop": {
+                "1": ["conditioning", "under bar", "in the hoop"],
+                "2": ["Transitions between static moves", "Dynamic movements", "Intro to spinning on the hoop", "Basic drops"],
+                "3": ["Advanced transitions", "Dynamic combos", "Inverted positions", "Intermediate drops"],
+                "4": ["Advanced spins and sequences", "Complex aerial combos", "Drops and rolls", "Advanced inverted moves"]
+            },
+            "pole": {
+                "1": ["spins","tricks","transitions"],
+                "2": ["Basic invert", "Intermediate holds and grips", "Intermediate spins", "Intermediate climbs and sits", "Intermediate floorwork"],
+                "3": ["Inverted crucifix", "Extended butterfly", "Intermediate aerial inverts", "Intermediate spins", "Intermediate climbs and sits", "Intermediate floorwork"],
+                "4": ["Spins", "Spin combinations", "Strength tricks", "Flexibility tricks", "Grippy tricks", "Example combinations"],
+                "5": ["Spins", "Strength tricks", "Flexibility tricks", "Dynamic and combination tricks", "Grippy tricks", "Example combinations"],
+                "6": ["Spins", "Strength tricks", "Flexibility tricks", "Dynamic and combination tricks", "Grippy tricks", "Example combinations"],
+                "7": ["Spins", "Strength tricks", "Flexibility tricks", "Dynamic and combination tricks", "Grippy tricks"],
+                "8":["Strength tricks", "Dynamic and combination tricks", "Grippy tricks"]
+}
+};
+    function showLevels(event) {
+        const selectedValue = event.target.value;
+        const levelSelect = document.getElementById('level-select');
+        levelSelect.innerHTML = '<option value="">Select a level</option>';
+        let levels = 0;
+
+        if (selectedValue === 'pole') {
+            levels = 8;
+        } else if (selectedValue ==='hoop') {
+            levels = 4;
+        } else if (selectedValue) {
+            levels = 4;
+        }
+
+        for (let i = 1; i <= levels; i++) {
+            const option = document.createElement('option');
+            option.value = i;
+            option.textContent = 'Level ' + i;
+            levelSelect.appendChild(option);
+        }
+    }
+
+    function updateCategories(equipment, level) {
+        const categorySelect = document.getElementById('category-select');
+        categorySelect.innerHTML = '<option value="">Select a category</option>';
+
+        if (categories.hasOwnProperty(equipment)
+                    && categories[equipment].hasOwnProperty(level)) {
+            const catOptions = categories[equipment][level];
+            catOptions.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category.toLowerCase();
+                option.textContent = category;
+                categorySelect.appendChild(option);
+            });
+        }
+
+        // Add the "Show All" option
+        const allOption = document.createElement('option');
+        allOption.value = 'all';
+        allOption.textContent = 'Show All';
+        categorySelect.appendChild(allOption);
+    }
+
+    function filterMoves() {
+        const equipmentSelect = document.getElementById('equipment-select');
+        const levelSelect = document.getElementById('level-select');
+        const categorySelect = document.getElementById('category-select');
+        const moves = document.querySelectorAll('li');
+        const subheadings = document.querySelectorAll('.subheading');
+
+        subheadings.forEach(subheading => {
+            subheading.style.display = 'none';
+        });
+
+        moves.forEach(move => {
+            if (move.getAttribute('data-equipment') === equipmentSelect.value
+                && move.getAttribute('data-level') === levelSelect.value
+                && (move.getAttribute('data-category') === categorySelect.value || categorySelect.value === 'all')) {
+                move.style.display = 'block';
+
+                // Show subheadings when the "Show All" option is selected
+                if (categorySelect.value === 'all') {
+                    const subheadingId = 'subheading-' + move.getAttribute('data-category');
+                    const subheading = document.getElementById(subheadingId);
+                    subheading.style.display = 'block';
+                }
+            } else {
+                move.style.display = 'none';
+            }
+        });
+    }
+</script>
+</head>
+<body>
+    <select id="equipment-select" onchange="showLevels(event)">
+        <option value="">Select equipment</option>
+        <option value="hoop">Hoop</option>
+        <option value="pole">Pole</option>
+    </select>
+    <select id="level-select" onchange="updateCategories(document.getElementById('equipment-select').value, this.value)">
+        <option value="">Select a level</option>
+    </select>
+    <select id="category-select" onchange="filterMoves()">
+        <option value="">Select a category</option>
+    </select>
+    <ul>
+        <!-- Add your move list items here -->
+        
+<div id="move-list-container">        
+<div>
+<li class="subheading" id="subheading-conditioning">Conditioning</li>
+<ul class="move-list">
+        <li data-equipment="hoop" data-level="1" data-category="conditioning">Wide overhand/underhand grip hang bent legs</li>
+        <li data-equipment="hoop" data-level="1" data-category="conditioning">Elbow hangs</li>
+           </ul>
+</div>
+<div>
+        <li class="subheading" id="subheading-under bar">Under bar</li>
+        <ul class="move-list">
+<li data-equipment="hoop" data-level="1" data-category="under bar">Straddle mount and dismount</li>
+<li data-equipment="hoop" data-level="1" data-category="under bar">Side straddle mount and dismount</li>
+    </ul>
+</div>
+
+<div>
+<li class="subheading" id="subheading-in the hoop">In the Hoop</li>
+<ul class="move-list">
+<li data-equipment="hoop" data-level="1" data-category="in the hoop">Double and single hocks climb into hoop</li>
+<li data-equipment="hoop" data-level="1" data-category="in the hoop">Layback sit</li>
+    </ul>
+</div>
+<!-- Add more move list items with subheadings as needed -->
+<div>
+<li class="subheading" id="subheading-spins">Spins</li>
+<ul class="move-list">
+<li data-equipment="pole" data-level="1" data-category="spins">Show girl</li>
+<li data-equipment="pole" data-level="1" data-category="spins">Reverse step around</li>
+<li data-equipment="pole" data-level="1" data-category="spins">Forward Knee hook (and variations)</li>
+<li data-equipment="pole" data-level="1" data-category="spins">Corkscrew</li>
+<li data-equipment="pole" data-level="1" data-category="spins">Fireman and variations</li>
+<li data-equipment="pole" data-level="1" data-category="spins">Tinkerbell</li>
+<li data-equipment="pole" data-level="1" data-category="spins">Tuck and fall</li>
+<li data-equipment="pole" data-level="1" data-category="spins">Sun-wheel</li>
+<li data-equipment="pole" data-level="1" data-category="spins">Backward knee hook</li>
+<li data-equipment="pole" data-level="1" data-category="spins">Swan/Elf (1 leg extended)</li>
+<li data-equipment="pole" data-level="1" data-category="spins">Chair (and variations)</li>
+<li data-equipment="pole" data-level="1" data-category="spins">Horizontal knee hook</li>
+<li data-equipment="pole" data-level="1" data-category="spins">Body Wrap</li>
+<li data-equipment="pole" data-level="1" data-category="spins">Single straddle (Open boomerang)</li>
+    </ul>
+</div>
+<div>
+<li class="subheading" id="subheading-tricks">Tricks</li>
+<ul class="move-list">
+<li data-equipment="pole" data-level="1" data-category="tricks">Fireman and pin-up/swan/jazz dismount</li>
+<li data-equipment="pole" data-level="1" data-category="tricks">Cartwheel kick</li>
+<li data-equipment="pole" data-level="1" data-category="tricks">Under-arm turn and ‘Jack’</li>
+<li data-equipment="pole" data-level="1" data-category="tricks">Back to pole slide + leg extension</li>
+<li data-equipment="pole" data-level="1" data-category="tricks">Carousel Kick</li>
+<li data-equipment="pole" data-level="1" data-category="tricks">Basic climb</li>
+<li data-equipment="pole" data-level="1" data-category="tricks">Log roll laying/sitting</li>
+<li data-equipment="pole" data-level="1" data-category="tricks">Low sit hooked foot anchor</li>
+<li data-equipment="pole" data-level="1" data-category="tricks">Low sit arm anchor</li>
+<li data-equipment="pole" data-level="1" data-category="tricks">Layout- hands on</li>
+<li data-equipment="pole" data-level="1" data-category="tricks">Basic inversion preparation</li>
+<li data-equipment="pole" data-level="1" data-category="tricks">Forearmstands with leg variations</li>
+    </ul>
+</div>
+<div>
+<li class="subheading" id="subheading-transitions">Transistions</li>
+<ul class="move-list">
+<li data-equipment="pole" data-level="1" data-category="transitions">Cross walks</li>
+<li data-equipment="pole" data-level="1" data-category="transitions">2 step walks</li>
+<li data-equipment="pole" data-level="1" data-category="transitions">Outside arm walk</li>
+<li data-equipment="pole" data-level="1" data-category="transitions">1 handed Pirrouette</li>
+<li data-equipment="pole" data-level="1" data-category="transitions">2 handed Pirrouette with passe</li>
+<li data-equipment="pole" data-level="1" data-category="transitions">Speed bump and tick tock</li>
+<li data-equipment="pole" data-level="1" data-category="transitions">Surfer girl and sumo get-ups</li>
+<li data-equipment="pole" data-level="1" data-category="transitions">Ballet hook and side lean</li>
+<li data-equipment="pole" data-level="1" data-category="transitions">Body waves</li>
+<li data-equipment="pole" data-level="1" data-category="transitions">Figure of 8 and hip dips</li>
+<li data-equipment="pole" data-level="1" data-category="transitions">Leg circles on floor – single and double</li>
+<li data-equipment="pole" data-level="1" data-category="transitions">Box split roll over</li>
+<li data-equipment="pole" data-level="1" data-category="transitions">Backward roll (to knees)</li>
+<li data-equipment="pole" data-level="1" data-category="transitions">Forward floor roll</li>
+<li data-equipment="pole" data-level="1" data-category="transitions">Shoulder swivel</li>
+<li data-equipment="pole" data-level="1" data-category="transitions">Faint</li>
+    </ul>
+</div>
+</ul>
+
+</body>
+</html>
+        
+
+
