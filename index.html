@@ -5,63 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Filter Moves</title>
     <style>
-  body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh; /* Change height to min-height */
-    margin: 0;
-}
-select {
-    width: 200px;
-    height: 40px;
-    margin-bottom: 20px;
-    font-size: 16px;
-}
-ul {
-    list-style-type: none;
-    padding: 0;
-    width: 100%;
-    max-width: 400px;
-    background-color: #f8f8f8;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    height: 400px; /* set a fixed height */
-    overflow-y: scroll; /* enable scrolling when content exceeds height */
-}
+ body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
 
-li {
-    display: none;
-    margin-bottom: 10px;
-    font-size: 16px;
-    padding: 10px;
-    background-color: #ffffff;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
+        select {
+            width: 200px;
+            height: 40px;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
 
-.move-list {
-    display: flex;
-    flex-direction: column;
-}
+        ul {
+            list-style-type: none;
+            padding: 0;
+            width: 100%;
+            max-width: 400px;
+            background-color: #f8f8f8;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            overflow-y: auto;
+            max-height: 500px;
+        }
 
-.subheading {
-    font-weight: bold;
-    margin-top: 15px;
-    display: none;
-    width: 100%;
-}
+        li {
+            display: none;
+            margin-bottom: 10px;
+            font-size: 16px;
+            padding: 10px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
 
-#move-list-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 20px;
-    max-width: 80%;
-}
+        .move-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .subheading {
+            font-weight: bold;
+            margin-top: 15px;
+            display: none;
+            width: 100%;
+        }
+
+        #move-list-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+            max-width: 80%;
+        }
+
+        @media (max-width: 600px) {
+            ul {
+                max-width: 100%;
+                border-radius: 0;
+                box-shadow: none;
+            }
+        }
     </style>
     <script>
         const categories = {
